@@ -1,0 +1,4 @@
+#!/home/joseph/hacker-reddit/backend/scraper/pyscraper/venv/bin/python3
+
+from splash.server import main
+main()
