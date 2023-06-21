@@ -8,3 +8,6 @@ install:
   - pip install -r requirements.txt
   - source $HOME/scraper/pyscraper/venv/bin/activate
   - cd $HOME/scraper/pyscraper/webscraper
+branches:
+  only:
+    - master
