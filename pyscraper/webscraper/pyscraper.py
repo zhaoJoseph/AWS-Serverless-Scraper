@@ -49,7 +49,7 @@ class PyScraper:
     def execute(self, url):
         scraper = self._get_scraper(url)
         data = scraper.get()
-        print(str(data))
+        yield data
 
 if __name__ == '__main__':
     if len(sys.argv) < 2 : 

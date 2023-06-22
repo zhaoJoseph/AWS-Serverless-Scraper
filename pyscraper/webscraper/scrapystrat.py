@@ -6,7 +6,7 @@ from scrapy.signalmanager import dispatcher
 from scrapy import signals
 
 from webscraper import settings as my_settings
-import os
+import os, sys
 
 class ScrapyStrat(ScrapeStrategy):
 
