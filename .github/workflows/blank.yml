@@ -25,11 +25,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         env: 
-             MODULE_PATH: ${{ secrets.MODULE_PATH }}
-             REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
-             REDDIT_SECRET: ${{ secrets.REDDIT_SECRET }}
-             REDDIT_PASSWORD: ${{ secrets.REDDIT_PASSWORD }}
-             REDDIT_USERNAME: ${{ secrets.REDDIT_USERNAME }}
+             MODULE_PATH: '${{ secrets.MODULE_PATH }}'
+             REDDIT_CLIENT_ID: '${{ secrets.REDDIT_CLIENT_ID }}'
+             REDDIT_SECRET: '${{ secrets.REDDIT_SECRET }}'
+             REDDIT_PASSWORD: '${{ secrets.REDDIT_PASSWORD }}'
+             REDDIT_USERNAME: '${{ secrets.REDDIT_USERNAME }}'
       - run: |  
               python --version
               python -m pip install --upgrade pip
