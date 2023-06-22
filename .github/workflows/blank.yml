@@ -24,8 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - run:  python -v
+      - run:  python --version
       - run:  python -m pip install --upgrade pip
       - run:  pip install -r requirements.txt
+      - run:  ls
       - run:  source /scraper/pyscraper/venv/bin/activate
       - run:  cd /scraper/pyscraper/webscraper
