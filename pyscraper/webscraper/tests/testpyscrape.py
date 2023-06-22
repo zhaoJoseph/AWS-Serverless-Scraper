@@ -1,7 +1,11 @@
 import pytest
 import sys
+from os import environ as env
+from dotenv import load_dotenv
 
-sys.path.insert(0, '/home/joseph/hacker-reddit/backend/scraper/pyscraper/webscraper')
+load_dotenv()
+
+sys.path.insert(0, env['MODULE_PATH'])
 
 import pyscraper
 
