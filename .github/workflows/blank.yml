@@ -29,4 +29,5 @@ jobs:
       - run:  pip install -r requirements.txt
       - run:  source pyscraper/venv/bin/activate
       - run:  cd pyscraper/webscraper
+      - run:  ls
       - run:  pytest tests/testpyscrape.py -v  --forked
