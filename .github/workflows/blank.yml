@@ -40,4 +40,5 @@ jobs:
               source pyscraper/venv/bin/activate
               cd pyscraper/webscraper
               ls
+              playwright install
               pytest tests/testpyscrape.py -v  --forked
