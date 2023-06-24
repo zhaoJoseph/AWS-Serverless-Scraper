@@ -5,7 +5,8 @@ phases:
       python: 3.10
     commands:
       - echo "Installing dependencies..."
-      - pip install -r aws/requirements.txt -t lib
+      - cd aws
+      - pip install -r requirements.txt -t lib
   build:
     commands:
       - echo "Zipping deployment package..."
@@ -18,7 +19,3 @@ phases:
       - echo "Updating lambda Function..."
       - aws lambda update-function-code --function-name lambda-scraper-fcn --zip-file fileb://deployment_package.zip
       - echo "DONE!!"
-artifacts:
-  base-directory: 'aws'
-  files:
-    - '**/*'
