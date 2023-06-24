@@ -17,5 +17,5 @@ phases:
   post_build:
     commands:
       - echo "Updating lambda Function..."
-      - aws lambda update-function-code --function-name lambda-scraper-fcn --zip-file fileb://deployment_package.zip --region us-east-1
+      - aws lambda update-function-code --function-name arn:aws:lambda:us-east-1:833725628045:function:lambda-scraper-fcn --zip-file fileb://deployment_package.zip --region us-east-1
       - echo "DONE!!"
