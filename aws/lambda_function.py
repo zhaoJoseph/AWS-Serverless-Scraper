@@ -42,7 +42,7 @@ class Awsbatch(AWSBatchSettings):
  
  
     def run(self, jobName = 'scrape job'):
- 
+        print("called")
         try:
             response = self.client.submit_job(
                 jobName=jobName,
@@ -60,6 +60,7 @@ class Awsbatch(AWSBatchSettings):
                     ],
                 }
                 )
+            
             return {
                 "status":-1,
                 "data":{
