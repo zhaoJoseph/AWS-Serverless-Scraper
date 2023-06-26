@@ -48,7 +48,7 @@ class Awsbatch(AWSBatchSettings):
                 jobQueue=self.jobQueue,
                 jobDefinition=self.jobDefinition,
                 arrayProperties={
-                    size: len(self.urlArray)
+                    "size": len(self.urlArray)
                 },
                 containerOverrides={
                     'environment': [
