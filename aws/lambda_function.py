@@ -26,7 +26,7 @@ AWS_REGION_NAME = os.getenv("AWS_REGION_NAME", None)
 class AWSBatchSettings(object):
  
     def __init__(self):
-        print(os.environ("jobQueue"))
+        print(os.environ["jobQueue"])
         self.jobQueue = os.getenv("jobQueue")
         self.jobDefinition = os.getenv("jobDefinition")
         self.urlArray = os.getenv("URL_ARRAY")
