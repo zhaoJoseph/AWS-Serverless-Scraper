@@ -5,6 +5,7 @@ from webscraper.spiders.twitterSpider import TwitterSpider
 from apiscraper.redditscrape import RedditApi
 from webscraper.spiders.htmlgrid import HTMLGridSpider
 import sys
+import os
 
 classNames = {
     "https://www.amazon.ca/gp/goldbox" : "DealGridItem-module__dealItemDisplayGrid_e7RQVFWSOrwXBX4i24Tqg",
@@ -49,11 +50,16 @@ class PyScraper:
     def execute(self, url):
         scraper = self._get_scraper(url)
         data = scraper.get()
-        yield data
+        print(data)
 
 if __name__ == '__main__':
-    if len(sys.argv) < 2 : 
+
+    if int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX']) and os.environ['URL_ARRAY']:
+        urlArray = os.environ['URL_ARRAY']
+        url = urlArray[int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])]
+    elif len(sys.argv) < 2 : 
         raise Exception("Error: url not supplied")
-    url = sys.argv[1]
+    else:
+        url = sys.argv[1]
     pyscrape = PyScraper()
     pyscrape.execute(url)

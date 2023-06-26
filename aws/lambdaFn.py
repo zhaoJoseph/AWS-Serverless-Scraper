@@ -28,7 +28,7 @@ class AWSBatchSettings(object):
     def __init__(self):
         self.jobQueue = os.getenv("jobQueue")
         self.jobDefinition = os.getenv("jobDefinition")
-        self.attemptDurationSeconds = os.getenv("attemptDurationSeconds")
+        self.urlArray = os.getenv("URL_ARRAY")
  
  
 class Awsbatch(AWSBatchSettings):
@@ -41,57 +41,34 @@ class Awsbatch(AWSBatchSettings):
         AWSBatchSettings.__init__(self)
  
  
-    def run(self, jobName = 'scrape job',python_file_name='pyscraper.py', payload={}):
+    def run(self, jobName = 'scrape job'):
  
         try:
-            if payload == {}:
-                response = self.client.submit_job(
-                    jobName=jobName,
-                    jobQueue=self.jobQueue,
-                    jobDefinition=self.jobDefinition,
-                    containerOverrides={
-                        "command": ["python",
-                                    python_file_name,
-                                    payload
-                                    ]
-                    },
-                    timeout={
-                        'attemptDurationSeconds': int(self.attemptDurationSeconds)
-                    })
-                return {
-                    "status":-1,
-                    "data":{
-                        "response":response
-                    },
-                    "error":{
- 
-                    }
+            response = self.client.submit_job(
+                jobName=jobName,
+                jobQueue=self.jobQueue,
+                jobDefinition=self.jobDefinition,
+                arrayProperties={
+                    size: len(self.urlArray)
+                },
+                containerOverrides={
+                    'environment': [
+                        {
+                            'name': 'URL_ARRAY',
+                            'value': self.urlArray
+                        },
+                    ],
                 }
- 
-            else:
-                payload = json.dumps(payload)
-                response = self.client.submit_job(
-                    jobName=jobName,
-                    jobQueue=self.jobQueue,
-                    jobDefinition=self.jobDefinition,
-                    containerOverrides={
-                        "command": ["python",
-                                    python_file_name,
-                                    payload
-                                    ]
-                    },
-                    timeout={
-                        'attemptDurationSeconds': int(self.attemptDurationSeconds)
-                    })
-                return {
-                    "status":-1,
-                    "data":{
-                        "response":response
-                    },
-                    "error":{
- 
-                    }
+                )
+            return {
+                "status":-1,
+                "data":{
+                    "response":response
+                },
+                "error":{
+
                 }
+            }
  
         except Exception as e:
             return {
