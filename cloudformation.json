@@ -1,24 +1,34 @@
 {
-    "ScheduledRule": {
-        "Type": "AWS::Events::Rule",
-        "Properties": {
-          "Description": "ScheduledRule",
-          "ScheduleExpression": "cron(0 6,12,18 * * ? *)",
-          "State": "ENABLED",
-          "Targets": [{
-            "Arn": { "Fn::GetAtt": ["lambda-scraper-fn", "Arn"] },
-            "Id": "TargetFunctionV1"
-          }]
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "cloudwatchRuleInvokeLambda": {
+            "Type": "AWS::Events::Rule",
+            "Properties": {
+                "Description": "Invoke Lambda",
+                "State": "ENABLED",
+                "ScheduleExpression": "cron(0 6,12,18 * * ? *)",          
+                "Targets": [
+                    {
+                        "Arn": "arn:aws:lambda:us-east-1:833725628045:function:lambda-scraper-fn",
+                        "Input": "{\"operation\":\"call-lambda\"}",
+                        "Id": "cloudwatchRuleInvokeLambda"
+                    }
+                ]
+            }
+        },
+        "cloudwatchRulePermissions": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+                "FunctionName": "lambda-scraper-fn",
+                "Action": "lambda:InvokeFunction",
+                "Principal": "events.amazonaws.com",
+                "SourceArn": { "Fn::GetAtt": ["cloudwatchRuleInvokeLambda", "Arn"] }
+            }
         }
-      },
-      "PermissionForEventsToInvokeLambda": {
-        "Type": "AWS::Lambda::Permission",
-        "Properties": {
-          "FunctionName": { "Ref": "lambda-scraper-fn" },
-          "Action": "lambda:InvokeFunction",
-          "Principal": "events.amazonaws.com",
-          "SourceArn": { "Fn::GetAtt": ["ScheduledRule", "Arn"] }
-        }
-      }
-  }
+        
+    },
+    
+    "Description": "Cloudformation template to create a Cloudwatch rule"
+
+}
   
