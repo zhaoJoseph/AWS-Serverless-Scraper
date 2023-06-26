@@ -73,6 +73,9 @@ class Awsbatch(AWSBatchSettings):
             }
  
         except Exception as e:
+
+            print(e, "EXCEPTION")
+
             return {
                 "status":-1,
                 "data":{},
