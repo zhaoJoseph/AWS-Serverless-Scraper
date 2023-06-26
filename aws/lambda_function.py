@@ -26,7 +26,7 @@ AWS_REGION_NAME = os.getenv("AWS_REGION_NAME", None)
 class AWSBatchSettings(object):
  
     def __init__(self):
-        print(os.getenv("jobQueue"))
+        print(os.environ("jobQueue"))
         self.jobQueue = os.getenv("jobQueue")
         self.jobDefinition = os.getenv("jobDefinition")
         self.urlArray = os.getenv("URL_ARRAY")
@@ -86,11 +86,11 @@ class Awsbatch(AWSBatchSettings):
             }
  
  
-def main():
+def main(event, context):
  
     Awsbatch_helper = Awsbatch()
     Awsbatch_helper.run()
  
  
 def lambda_handler(event, context):
-    main()
+    main(event, context)
