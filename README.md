@@ -2,7 +2,7 @@
 Serveless Web Scraper using AWS services such as batch and cloudwatch
 
 <div align="center">
-    <img src="/screenshots/screen1.jpg" width="400px"</img> 
+    <img src="diagram_aws.jpg" width="400px"</img> 
 </div>
 
 # Description
