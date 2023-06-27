@@ -1,7 +1,9 @@
 # Serverless Web Scraper
 Serveless Web Scraper using AWS services such as batch and cloudwatch
 
-![alt text](https://ibb.co/bmbJtxh) 
+<div align="center">
+    <img src="/screenshots/screen1.jpg" width="400px"</img> 
+</div>
 
 # Description
 Python based web scraper that uses scrapy framework alongside playwight plugin to perform webscraping.
