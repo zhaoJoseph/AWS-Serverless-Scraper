@@ -63,7 +63,7 @@ class Awsbatch(AWSBatchSettings):
             print(response, "RESPONSE")
             
             return {
-                "status":-1,
+                "status":200,
                 "data":{
                     "response":response
                 },

@@ -54,7 +54,7 @@ class PyScraper:
 
 if __name__ == '__main__':
 
-    if int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX']) and os.environ['URL_ARRAY']:
+    if ('AWS_BATCH_JOB_ARRAY_INDEX' in os.environ ) and int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX']) and ( 'URL_ARRAY' in os.environ):
         urlArray = os.environ['URL_ARRAY']
         url = urlArray[int(os.environ['AWS_BATCH_JOB_ARRAY_INDEX'])]
     elif len(sys.argv) < 2 : 
