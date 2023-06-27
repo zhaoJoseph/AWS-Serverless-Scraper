@@ -25,24 +25,23 @@ AWS_REGION_NAME = os.getenv("AWS_REGION_NAME", None)
  
 class AWSBatchSettings(object):
  
-    def __init__(self):
-        print(os.environ["jobQueue"])
-        self.jobQueue = os.getenv("jobQueue")
-        self.jobDefinition = os.getenv("jobDefinition")
-        self.urlArray = os.getenv("URL_ARRAY")
+    def __init__(self, object):
+        self.jobQueue = object["jobQueue"]
+        self.jobDefinition = object["jobDefinition"]
+        self.urlArray = object["URL_ARRAY"]
  
  
 class Awsbatch(AWSBatchSettings):
  
-    def __init__(self):
+    def __init__(self, event):
         self.client = boto3.client("batch",
                                    aws_access_key_id=AWS_ACCESS_KEY,
                                    aws_secret_access_key=AWS_SECRET_KEY,
                                    region_name=AWS_REGION_NAME)
-        AWSBatchSettings.__init__(self)
+        AWSBatchSettings.__init__(self, event)
  
  
-    def run(self, jobName = 'scrape job'):
+    def run(self, jobName = 'scrape-job'):
         try:
             response = self.client.submit_job(
                 jobName=jobName,
@@ -55,7 +54,7 @@ class Awsbatch(AWSBatchSettings):
                     'environment': [
                         {
                             'name': 'URL_ARRAY',
-                            'value': self.urlArray
+                            'value': str(self.urlArray)
                         },
                     ],
                 }
@@ -86,11 +85,14 @@ class Awsbatch(AWSBatchSettings):
             }
  
  
-def main(event, context):
+def lambda_handler(event, context):
  
-    Awsbatch_helper = Awsbatch()
+    Awsbatch_helper = Awsbatch(event)
     Awsbatch_helper.run()
  
- 
-def lambda_handler(event, context):
-    main(event, context)
+
+# For dev environment
+if __name__ == '__main__':
+    event = {"jobQueue" : "scraper_queue", "jobDefinition" : "scraper_definition", "URL_ARRAY" : ["https://www.amazon.ca/gp/goldbox"]}
+    context = []
+    lambda_handler(event, context)
