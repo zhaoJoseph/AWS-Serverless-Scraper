@@ -1,6 +1,8 @@
 # Serverless Web Scraper
 Serveless Web Scraper using AWS services such as batch and cloudwatch
 
+![alt text](https://ibb.co/bmbJtxh) 
+
 # Description
 Python based web scraper that uses scrapy framework alongside playwight plugin to perform webscraping.
 Built to be deployed in AWS services, triggered via lambda function in aws folder.
@@ -8,9 +10,22 @@ Built to be deployed in AWS services, triggered via lambda function in aws folde
 # Getting Started
 ## Dependencies
 - Python 3.10.11
+- Pip
 - Linux
 - Git
 
-# Installing
+## Installing
 - git clone repository
-- activate virtual environment (source 
+- cd into repo
+- activate virtual environment (source pyscraper/venv/bin/activate )
+- pip install -r requirements.txt
+
+## Running
+- cd repo
+- python pyscraper/pyscraper.py [URL]
+
+## Testing
+- cd repo
+- cd pyscraper
+- playwright install
+- pytest tests/testpyscrape.py -v  --forked
