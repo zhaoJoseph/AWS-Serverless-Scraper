@@ -11,4 +11,6 @@ Built to be deployed in AWS services, triggered via lambda function in aws folde
 - Linux
 - Git
 
-
+# Installing
+- git clone repository
+- activate virtual environment (source 
